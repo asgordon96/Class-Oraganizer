@@ -14,6 +14,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    if @user.id != params[:id].to_i
+      redirect_to '/'
+    end
   end
 
   def destroy

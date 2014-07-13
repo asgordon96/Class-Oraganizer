@@ -1,3 +1,5 @@
 <%= form_tag '/sessions/signout', method: :post do %>
    <%= button_tag 'Sign Out', {class: 'btn btn-primary'} %>
 <% end %>
+
+<%= link_to 'Add Course', '/courses/new', {class: 'btn btn-primary'} %>
