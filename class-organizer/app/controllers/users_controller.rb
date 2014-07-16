@@ -17,6 +17,7 @@ class UsersController < ApplicationController
     if @user.id != params[:id].to_i
       redirect_to '/'
     end
+    @courses = @user.courses
   end
 
   def destroy

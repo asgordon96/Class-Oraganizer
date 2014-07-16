@@ -1,5 +1,23 @@
-<%= form_tag '/sessions/signout', method: :post do %>
-   <%= button_tag 'Sign Out', {class: 'btn btn-primary'} %>
-<% end %>
+<div class="container">
+  <%= form_tag '/sessions/signout', method: :post do %>
+     <%= button_tag 'Sign Out', {class: 'btn btn-primary'} %>
+  <% end %>
 
-<%= link_to 'Add Course', '/courses/new', {class: 'btn btn-primary'} %>
+  <%= link_to 'Add Course', '/courses/new', {class: 'btn btn-primary'} %>
+  
+  <div class="row">
+    <% for course in @courses %>
+      <div class="col-xs-4 card">
+        <div class="inner-card">
+          <h4><%= course.title %></h4>
+          <ul class="list-unstyled">
+            <li><b>Course Code</b> <%= course.code %></li>
+            <li><b>Instructor</b> <%= course.instructor %></li>
+            <li><b>Location</b> <%= course.location %></li>
+            <li><b>Credits</b> <%= course.credits %></li>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
