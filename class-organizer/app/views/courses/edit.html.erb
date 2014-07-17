@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <h1>Edit Course</h1>
+
+      <%= form_for :course, method: :patch, url: {action: :update}, role: 'form' do |f| %>
+        <div class='form-group'>
+          <%= f.label :title %></td>
+          <%= f.text_field :title, {class: 'form-control', value: @course.title} %></td>
+        </div>
+        <div class='form-group'>
+          <%= f.label :code, 'Course Code' %>
+          <%= f.text_field :code, {class: 'form-control', value: @course.code} %>
+        </div>
+        <div class='form-group'>
+          <%= f.label :instructor %></td>
+          <%= f.text_field :instructor, {class: 'form-control', value: @course.instructor} %></td>
+        </div>
+        <div class='form-group'>
+          <%= f.label :location %></td>
+          <%= f.text_field :location, {class: 'form-control', value: @course.location} %></td>
+        </div>
+        <div class='form-group'>
+          <%= f.label :section %>
+          <%= f.text_field :section, {class: 'form-control', value: @course.section} %>
+        </div>
+        <div class='form-group'>
+          <%= f.label :credits, 'Credits (number)' %>
+          <%= f.text_field :credits, {class: 'form-control', type: 'number', value: @course.credits} %>
+        </div>
+        <%= f.submit 'Done', :class => 'btn btn-primary'%>
+        <%= link_to 'Cancel', user_path(@user), :class => 'btn btn-default' %>
+      <% end %>
+    </div>
+  </div>
+</div>
