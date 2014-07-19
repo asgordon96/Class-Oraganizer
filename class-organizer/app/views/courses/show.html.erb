@@ -1,10 +1,40 @@
 
 <div class="container">
-  <h2><%= @course.title %></h2>
-
-  <div id="editor">
+  <h3 class="text-center"><%= @course.title %></h2> 
+  
+  <div class="row">
+    <div class="col-md-3">
+      <button id="new_note" class="btn btn-primary btn-lg">New Note</button>
+      
+      <div style="margin-top: 15px">
+        <ul class="list-group">
+          <% for note in @course.notes %>
+            <a id="<%= note.id %>" class="list-group-item"><%= note.title %></a>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <h3 class="text-center" id="note_title">No Note Selected</h3>
+      <div id="editor"></div>
+    </div>
   </div>
 </div>
+
 <script type="text/javascript">
+    function display_note(note_id) {
+      url = "/notes/" + note_id;
+      $.get(url, function(data) {
+        $("#editor").trumbowyg("html", data.body);
+        $("#note_title").html(data.title);
+      });
+    }
+
     $("#editor").trumbowyg();
+    $(".list-group-item").on("click", function(event) {
+      $(".list-group-item").removeClass("active")
+      $(event.target).addClass("active");
+      var note_id = $(event.target).attr('id');
+      display_note(note_id);
+    });
 </script>
