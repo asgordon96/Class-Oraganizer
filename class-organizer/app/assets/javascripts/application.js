@@ -13,5 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require quill.min.js
+//= require trumbowyg.min.js
 //= require_tree .

@@ -25,4 +25,14 @@ class CoursesController < ApplicationController
     redirect_to user_path(@user)
   end
   
+  def show
+    @course = Course.find(params[:id])
+    if @course.user == @user
+    end
+  end
+  
+  def icons
+    send_file 'vendor/assets/icons-sa75ce98b2b.png', type: 'image/png'
+  end
+  
 end
