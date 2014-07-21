@@ -13,4 +13,10 @@ class NotesController < ApplicationController
     render json: {}
   end
   
+  def create
+    course = Course.find(params[:course_id])
+    new_note = course.notes.create(title: params[:title], body: "")
+    render json: {id: new_note.id}
+  end
+  
 end

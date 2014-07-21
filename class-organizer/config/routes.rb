@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   
   get '/notes/:id', to: 'notes#get'
   post '/notes/:id', to: 'notes#update'
+  post '/notes', to: 'notes#create'
 end

@@ -4,7 +4,28 @@
   
   <div class="row">
     <div class="col-md-3">
-      <button id="new_note" class="btn btn-primary btn-lg">New Note</button>
+      <!-- New Note Button -->
+      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">New Note</button>
+
+      <!-- New Note Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">Create a New Note</h4>
+            </div>
+            <div class="modal-body">
+              <label for="title">Note Title</label>
+              <input id="title" class="form-control" type="text"/>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button id="create" type="button" class="btn btn-primary" data-dismiss="modal">Create</button>
+            </div>
+          </div>
+        </div>
+      </div>
       
       <div style="margin-top: 15px">
         <ul class="list-group">
@@ -23,17 +44,23 @@
 </div>
 
 <script type="text/javascript">
+    
+    window.course_id = <%= @course.id %>
+
     function display_note(note_id) {
       var url = "/notes/" + note_id;
       $.get(url, function(data) {
-        console.log(data.body);
         $("#editor").trumbowyg("html", data.body);
         $("#note_title").html(data.title);
+        if (data.body == "") {
+          $("#editor").trumbowyg("empty");
+        }
       });
     }
 
     $("#editor").trumbowyg();
-    $(".list-group-item").on("click", function(event) {
+    
+    $(document).on("click", ".list-group", function(event) {
       $(".list-group-item").removeClass("active")
       $(event.target).addClass("active");
       var note_id = $(event.target).attr('id');
@@ -47,9 +74,22 @@
       $.post(url, {body: body});
     }
     
+    function create_note(title) {
+      $.post("/notes", {title: title, course_id: window.course_id}, function(data) {
+        var id = data.id;
+        var html = "<a id=" + id + " class='list-group-item'>" + title + "</a>"
+        $(".list-group").append(html);
+      });
+    }
+    
     $("#save").on("click", function(event) {
-      save_note(window.current_note)
-    })
+      save_note(window.current_note);
+    });
+    
+    $("#create").on("click", function(event) {
+      var title = $("#title").val();
+      create_note(title);
+    });
 
     
 </script>
