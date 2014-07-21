@@ -17,14 +17,16 @@
     <div class="col-md-9">
       <h3 class="text-center" id="note_title">No Note Selected</h3>
       <div id="editor"></div>
+      <button id="save" class="btn btn-primary btn-lg">Save</button>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
     function display_note(note_id) {
-      url = "/notes/" + note_id;
+      var url = "/notes/" + note_id;
       $.get(url, function(data) {
+        console.log(data.body);
         $("#editor").trumbowyg("html", data.body);
         $("#note_title").html(data.title);
       });
@@ -36,5 +38,18 @@
       $(event.target).addClass("active");
       var note_id = $(event.target).attr('id');
       display_note(note_id);
+      window.current_note = note_id;
     });
+    
+    function save_note(note_id) {
+      var body = $("#editor").trumbowyg("html");
+      var url = "/notes/" + note_id;
+      $.post(url, {body: body});
+    }
+    
+    $("#save").on("click", function(event) {
+      save_note(window.current_note)
+    })
+
+    
 </script>

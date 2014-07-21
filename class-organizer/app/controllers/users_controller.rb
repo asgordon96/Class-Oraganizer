@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def show
     if @user.id != params[:id].to_i
-      redirect_to '/'
+      return_404
     end
     @courses = @user.courses
   end

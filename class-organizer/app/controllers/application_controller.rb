@@ -10,4 +10,9 @@ class ApplicationController < ActionController::Base
       redirect_to '/signin'
     end
   end
+  
+  def return_404
+    render :file => "public/404.html", :status => 404
+  end
+  
 end

@@ -21,7 +21,7 @@
             <li><b>Credits</b> <%= course.credits %></li>
           </ul>
           
-          <%= link_to "Notes", "", class: "btn btn-default btn-sm" %>
+          <%= link_to "Notes", course_path(course), class: "btn btn-default btn-sm" %>
           <%= link_to "Edit", edit_course_path(course), class: "btn btn-default btn-sm" %>
         </div>
       </div>

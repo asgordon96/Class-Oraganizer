@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get 'images/icons-sa75ce98b2b.png', to: 'courses#icons' # here we get the icons for the editor
   
   get '/notes/:id', to: 'notes#get'
+  post '/notes/:id', to: 'notes#update'
 end

@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
   def edit
     @course = Course.find(params[:id])
     if @course.nil? or @course.user != @user
-      redirect_to "/"
+      return_404
     end
   end
   
