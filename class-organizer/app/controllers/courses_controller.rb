@@ -35,4 +35,8 @@ class CoursesController < ApplicationController
     send_file 'vendor/assets/icons-sa75ce98b2b.png', type: 'image/png'
   end
   
+  def icons2
+    send_file 'vendor/assets/icons-2x-s9034954e6d.png', type: 'image/png'
+  end
+  
 end
