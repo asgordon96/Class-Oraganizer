@@ -8,6 +8,8 @@ class UsersController < ApplicationController
     new_user = User.new(user_params)
     if new_user.valid?
       new_user.save
+      session[:user_id] = new_user.id
+      redirect_to user_path(new_user)
     else
       redirect_to '/users/new'
     end
